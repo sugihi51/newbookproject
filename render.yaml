@@ -1,0 +1,19 @@
+databases:
+  - name: mysitedb
+    plan: free
+    databaseName: aaa
+    user: sugihi
+services:
+  - type: web
+    plan: free
+    name: sugihi
+    runtime: python
+    buildCommand: "./build.sh"
+    staticCommand: "python -m gunicorn bookproject.asgi:application -k uvicorn.workers.UvicornWorker"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: mysitedb
+          property: connectionString
+      - key: WEB_CONCURRENCY
+        value: 4

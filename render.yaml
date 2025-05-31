@@ -9,7 +9,7 @@ services:
     name: sugihi
     runtime: python
     buildCommand: "./build.sh"
-    staticCommand: "python -m gunicorn bookproject.asgi:application -k uvicorn.workers.UvicornWorker"
+    startCommand: "python -m gunicorn bookproject.asgi:application -k uvicorn.workers.UvicornWorker"
     envVars:
       - key: DATABASE_URL
         fromDatabase:
